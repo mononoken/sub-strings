@@ -2,23 +2,39 @@ dictionary = ["below","down","go","going","horn","how","howdy","it","i","low","o
 
 test_string = "Howdy partner, sit down! How's it going?"
 
-def substrings(input_string, dictionary)
-  words_array = input_string.downcase.split
-
+def get_words_array(string)
+  string.downcase.split(" ")
 end
 
-def find_words_substrings(word)
+def find_word_substrings(word)
   letters_array = word.split("")
-  first_letter_pos = 0
   last_letter_pos = letters_array.length - 1
   sub_str_array = []
 
-  until last_letter_pos <= first_letter_pos
-    sub_str = letters_array[first_letter_pos,last_letter_pos]
-    sub_str_array.push(sub_str.join(""))
-    last_letter_pos -= 1
+  letters_array.each_with_index do |letter, first_letter_pos|
+    until last_letter_pos < first_letter_pos
+      sub_str = letters_array[first_letter_pos..last_letter_pos]
+      sub_str_array.push(sub_str.join(""))
+      last_letter_pos -= 1
+    end
+    
+    first_letter_pos += 1
+    last_letter_pos = letters_array.length - 1
   end
+
   sub_str_array
 end
 
-substrings(test_string, dictionary)
+def find_words_substrings(sentence_array)
+  sentence_substrings = sentence_array.map do |word|
+    find_word_substrings(word)
+  end
+  sentence_substrings.flatten
+end
+
+def substrings(input_string, dictionary)
+  words_array = get_words_array(input_string)
+  words_substrings = find_words_substrings(words_array).uniq
+end
+
+p substrings(test_string, dictionary)
