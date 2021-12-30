@@ -32,9 +32,18 @@ def find_words_substrings(sentence_array)
   sentence_substrings.flatten
 end
 
+def find_substring_matches(input_substrings, dictionary)
+  substring_count = input_substrings.tally
+  substring_count.select do |substring, count|
+    dictionary.include?(substring)
+  end
+end
+
 def substrings(input_string, dictionary)
   words_array = get_words_array(input_string)
-  words_substrings = find_words_substrings(words_array).uniq
+  words_substrings = find_words_substrings(words_array)
+  substring_count = find_substring_matches(words_substrings, dictionary)
+  substring_count
 end
 
 p substrings(test_string, dictionary)
