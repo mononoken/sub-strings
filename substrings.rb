@@ -1,7 +1,3 @@
-dictionary = ["below","down","go","going","horn","how","howdy","it","i","low","own","part","partner","sit"]
-
-test_string = "Howdy partner, sit down! How's it going?"
-
 def get_words_array(string)
   string.downcase.split(" ")
 end
@@ -46,4 +42,8 @@ def substrings(input_string, dictionary)
   substring_count
 end
 
-p substrings(test_string, dictionary)
+dictionary = ["below","down","go","going","horn","how","howdy","it","i","low","own","part","partner","sit"]
+
+test_string = "Howdy partner, sit down! How's it going?"
+
+substrings(test_string, dictionary)
